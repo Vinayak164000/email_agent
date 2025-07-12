@@ -8,6 +8,7 @@ from langgraph.graph.message import add_messages
 class State(TypedDict):
     messages : Annotated[list, add_messages]
     subject: str
+    name: str
 
 
 class GraphBuilder():
@@ -20,7 +21,7 @@ class GraphBuilder():
 
     def agent_function(self, state: State):
         user_question = state["subject"]
-        return {"messages":[self.llm.invoke(f"Write an email about {user_question}")]}
+        return {"messages":[self.llm.invoke(f"Write an email on {user_question} in the name of {state['name']}")]}  # Message added to messages field
     
 
     def build_graph(self):
@@ -34,10 +35,3 @@ class GraphBuilder():
 
     def __call__(self):
         return self.build_graph()
-    
-
-if __name__ == "__main__":
-    graph_builder = GraphBuilder(model_provider="groq")
-    graph = graph_builder()
-    # print(graph)
-    # print("Graph built successfully.")

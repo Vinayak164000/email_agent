@@ -3,9 +3,8 @@ from dotenv import load_dotenv
 from typing import Literal, Optional, Any
 from pydantic import BaseModel, Field
 from config_loader import load_config
-from langchain.chat_models import init_chat_model
+from langchain.chat_models import  init_chat_model
 
-load_dotenv()
 
 class ConfigLoader:
     def __init__(self):
