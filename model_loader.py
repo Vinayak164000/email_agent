@@ -3,8 +3,9 @@ from dotenv import load_dotenv
 from typing import Literal, Optional, Any
 from pydantic import BaseModel, Field
 from config_loader import load_config
-from langchain_groq import ChatGroq
+from langchain.chat_models import init_chat_model
 
+load_dotenv()
 
 class ConfigLoader:
     def __init__(self):
@@ -27,8 +28,7 @@ class ModelLoader(BaseModel):
     def load_llm(self):
         if self.model_provider == "groq":
             print("Loading LLM from Groq..............")
-            groq_api_key = os.getenv("GROQ_API_KEY")
-            model_name = self.config["llm"]["groq"]["model_name"]
-            llm=ChatGroq(model=model_name, api_key=groq_api_key)
+            os.environ["GOOGLE_API_KEY"] = os.getenv("GEMINI_API_KEY")
+            llm= init_chat_model("google_genai:gemini-2.0-flash")
         
         return llm

@@ -36,7 +36,7 @@ async def email_writing_agent(query:QueryRequest):
 
         print(f"Graph saved as 'my_graph.png' in {os.getcwd()}")
         # Assuming request is a pydantic object like: {"question": "your text"}
-        messages={"messages": [query.question]}
+        messages={"subject": [query.question]}
         output = react_app.invoke(messages)
 
         # If result is dict with messages:

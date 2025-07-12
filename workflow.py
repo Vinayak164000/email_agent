@@ -1,7 +1,13 @@
 from langgraph.graph import StateGraph, MessagesState, END, START
-from langgraph.prebuilt import ToolNode, tools_condition
 from model_loader import ModelLoader
 from prompt import SYSTEM_PROMPT
+from typing import Annotated
+from typing_extensions import TypedDict
+from langgraph.graph.message import add_messages
+
+class State(TypedDict):
+    messages : Annotated[list, add_messages]
+    subject: str
 
 
 class GraphBuilder():
@@ -12,13 +18,13 @@ class GraphBuilder():
         self.graph = None
         self.system_prompt = SYSTEM_PROMPT
 
-    def agent_function(self, state: MessagesState):
-        user_question = state["messages"]
-        return {"messages":[self.llm.invoke(f"Write an email about {state['messages']}")]}
-
+    def agent_function(self, state: State):
+        user_question = state["subject"]
+        return {"messages":[self.llm.invoke(f"Write an email about {user_question}")]}
+    
 
     def build_graph(self):
-        graph_builder= StateGraph(MessagesState)
+        graph_builder= StateGraph(State)
         graph_builder.add_node("write_email", self.agent_function)
         graph_builder.set_entry_point("write_email")
         self.chain = graph_builder.compile()
@@ -28,3 +34,10 @@ class GraphBuilder():
 
     def __call__(self):
         return self.build_graph()
+    
+
+if __name__ == "__main__":
+    graph_builder = GraphBuilder(model_provider="groq")
+    graph = graph_builder()
+    # print(graph)
+    # print("Graph built successfully.")
