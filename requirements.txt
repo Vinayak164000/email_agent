@@ -1,0 +1,10 @@
+uvicorn
+fastapi
+langgraph
+langchain
+langchain-google-genai
+bcrypt
+python-jose
+python-dotenv
+streamlit
+SQLAlchemy
