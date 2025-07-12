@@ -20,3 +20,5 @@ myenv
 
 agent.py
 lookout.py
+
+users.db
