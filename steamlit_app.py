@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
 
-BASE_URL = "http://localhost:8000"  # FastAPI backend
+import os
+BASE_URL = os.getenv("BACKEND_URL", "https://email-agent-backend.onrender.com")  # FastAPI backend
 
 st.set_page_config(
     page_title="Email Writing Agentic Application",
