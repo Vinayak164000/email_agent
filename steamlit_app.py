@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 import os
-BASE_URL = "BASE_URL = "https://email-agent-backend-c9ts.onrender.com"  # FastAPI backend
+BASE_URL = "https://email-agent-backend-gixa.onrender.com"  # FastAPI backend
 
 st.set_page_config(
     page_title="Email Writing Agentic Application",
