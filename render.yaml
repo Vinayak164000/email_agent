@@ -16,7 +16,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run streamlit_app.py --server.port 10000 --server.enableCORS false
+    startCommand: streamlit run steamlit_app.py --server.port 10000 --server.enableCORS false
     envVars:
       - key: BACKEND_URL
         value: https://email-agent-backend.onrender.com
