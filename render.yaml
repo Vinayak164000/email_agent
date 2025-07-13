@@ -7,12 +7,7 @@ services:
     startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
     envVars:
       - key: SECRET_KEY
-        value: GEMINI_API_KEY
-    buildFilter:
-      paths:
-        - main.py
-        - requirements.txt
-        - *.py
+        value: your_secret_here
     autoDeploy: true
     branch: main
 
@@ -22,11 +17,6 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: streamlit run streamlit_app.py --server.port 10000 --server.enableCORS false
-    buildFilter:
-      paths:
-        - streamlit_app.py
-        - requirements.txt
-        - *.py
     envVars:
       - key: BACKEND_URL
         value: https://email-agent-backend.onrender.com
